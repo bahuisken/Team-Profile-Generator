@@ -23,9 +23,15 @@ node index.js
 
 Complete the prompts in the terminal. An HTML file will be generated based on the input. 
 
+[Click here for a video walkthrough of this application](TBD)
+
 [Here is a sample HTML created with this Generator](TBD)
 
-[Click here for a video walkthrough of this application](TBD)
+Here is a screenshot of the generated HTML:
+
+![Screenshot](./assets/images/10-object-oriented-programming-homework-demo.png)
+
+
 
 ## Credits
 
