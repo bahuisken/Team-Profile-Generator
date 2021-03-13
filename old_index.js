@@ -1,16 +1,15 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const path = require('path');
+const generateHTML = require('./src/generateHTML');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const createFullTeam = require('./src/template');
-
-const OUTPUT_DIR = path.resolve(__dirname, 'dist');
-const outputPath = path.join(OUTPUT_DIR, 'se-team.html')
 //Declare variables
-const teamArr = [];
+const mgrArray = [];
+const engArray = [];
+const intArray = [];
+const teamHTMLArray = [];
 // Function to make a Manager
 function makeManager() {
     console.log("Please build your team");
@@ -46,8 +45,9 @@ function makeManager() {
             name: 'officeNumber',
         },
     ]).then(data => {
-        const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
-        teamArr.push(manager);
+        let manager = new Manager(data.name, data.id, data.email, data.officeNumber);
+        mgrArray.push(manager);
+        console.log(mgrArray);
         //call addTeammate
         addTeammate();
     })
@@ -86,8 +86,9 @@ function makeEngineer() {
             name: 'github',
         },
     ]).then(data => {
-        const engineer = new Engineer(data.name, data.id, data.email, data.github);
-        teamArr.push(engineer);
+        let engineer = new Engineer(data.name, data.id, data.email, data.github);
+        engArray.push(engineer);
+        console.log(engArray);
         //call addTeammate
         addTeammate();
     })
@@ -126,8 +127,9 @@ function makeIntern() {
             name: 'school',
         },
     ]).then(data => {
-        const intern = new Intern(data.name, data.id, data.email, data.school);
-        teamArr.push(intern);
+        let intern = new Intern(data.name, data.id, data.email, data.school);
+        intArray.push(intern);
+        console.log(intArray);
         //call addTeammate
         addTeammate();
     })
@@ -150,22 +152,69 @@ function addTeammate() {
                 makeIntern();
                 break;
             default:
-                buildTeam();
+                generateTeam();
                 break;
         }
     })
 }
 // TODO: Create a function to write README file
-function writeToFile(outputPath, data) {
-    return fs.writeFileSync(outputPath, data)
+function writeToFile(fileName, data) {
+    return fs.writeFileSync(fileName, data)
 }
 
 // TODO: Create a function to initialize app
-function buildTeam() {
-    // fs.writeFile(outputPath, createFullTeam(teamArr));
-    // console.log('You created a Team', teamArr)
-    writeToFile(outputPath, createFullTeam(teamArr));
-    console.log('you will write ', outputPath);
+function generateTeam() {
+    const filename = 'dist/team.html';
+    let mgrHTMLArray = [];
+    let engHTMLArray = [];
+    let intHTMLArray = [];
+    mgrHTMLArray.push(`<div class="card mx-auto mb-3 shadow my-card">
+        <div class="card-header text-white bg-primary">
+        <h2 class="card-title">${mgrArray[0].name}</h2>
+        <h3 class="card-title"><i class="fas fa-mug-hot"></i> Manager</h3>
+        </div>
+        <div class="card-body bg-light">
+        <ul class="list-group">
+            <li class="list-group-item"><strong>ID:</strong> ${mgrArray[0].id}</li>
+            <li class="list-group-item"><strong>Email:</strong> <a href="mailto:${mgrArray[0].email}?subject=So, you're the Manager?">${mgrArray[0].email}</a></li>
+            <li class="list-group-item"><strong>Office Number:</strong> ${mgrArray[0].officeNumber}</li>
+        </ul>
+        </div>
+        </div>`);
+    for (let i = 0; i < engArray.length; i++) {
+        engHTMLArray.push(`<div class="card mx-auto mb-3 shadow my-card">
+        <div class="card-header text-white bg-primary">
+        <h2 class="card-title">${engArray[i].name}</h2>
+        <h3 class="card-title"><i class="fas fa-glasses mr-2"></i> Engineer</h3>
+        </div>
+        <div class="card-body bg-light">
+        <ul class="list-group">
+            <li class="list-group-item"><strong>ID:</strong> ${engArray[i].id}</li>
+            <li class="list-group-item"><strong>Email:</strong> <a href="mailto:${engArray[i].email}?subject=So, you're an Engineer?">${engArray[i].email}</a></li>
+            <li class="list-group-item"><strong>GitHub:</strong> <a href="https://github.com/${engArray[i].github}" target="_blank">${engArray[i].github}</a></li>
+        </ul>
+        </div>
+        </div>`);
+    }
+    for (let j = 0; j < intArray.length; j++) {
+        intHTMLArray.push(`<div class="card mx-auto mb-3 shadow my-card">
+        <div class="card-header text-white bg-primary">
+        <h2 class="card-title">${intArray[j].name}</h2>
+        <h3 class="card-title"><i class="fas fa-user-graduate"></i> Intern</h3>
+        </div>
+        <div class="card-body bg-light">
+        <ul class="list-group">
+            <li class="list-group-item"><strong>ID:</strong> ${intArray[j].id}</li>
+            <li class="list-group-item"><strong>Email:</strong> <a href="mailto:${intArray[j].email}?subject=So, you're an Intern?">${intArray[j].email}</a></li>
+            <li class="list-group-item"><strong>School:</strong> ${intArray[j].school}</li>
+        </ul>
+        </div>
+        </div>`);
+    }
+    const teamOutput = teamHTMLArray.concat(mgrHTMLArray, engHTMLArray, intHTMLArray).join('')
+    writeToFile(filename, generateHTML(teamOutput))
+    console.log('you will write ', filename)
+
 }
 
 // Function call to initialize app
