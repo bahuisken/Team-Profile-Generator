@@ -1,0 +1,29 @@
+{
+  "name": "Team-Profile-Generator",
+  "version": "1.0.0",
+  "description": "A Node.js command-line application using the [Inquirer package](https://www.npmjs.com/package/inquirer) that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person.",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "utils": "utils"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahuisken/Team-Profile-Generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bahuisken/Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/bahuisken/Team-Profile-Generator#readme",
+  "dependencies": {
+    "email-validator": "^2.0.4",
+    "inquirer": "^8.0.0",
+    "util": "^0.12.3"
+  }
+}
