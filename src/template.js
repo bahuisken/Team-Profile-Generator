@@ -19,7 +19,7 @@ const generateTeam = fullTeam => {
 
     const generateEngineer = Engineer => {
         return `<div class="card mx-auto mb-3 shadow my-card">
-        <div class="card-header text-white bg-primary">
+        <div class="card-header text-white bg-secondary">
         <h2 class="card-title">${Engineer.getName()}</h2>
         <h3 class="card-title"><i class="fas fa-glasses mr-2"></i> Engineer</h3>
         </div>
@@ -35,7 +35,7 @@ const generateTeam = fullTeam => {
 
     const generateIntern = Intern => {
         return `<div class="card mx-auto mb-3 shadow my-card">
-        <div class="card-header text-white bg-primary">
+        <div class="card-header text-white bg-info">
         <h2 class="card-title">${Intern.getName()}</h2>
         <h3 class="card-title"><i class="fas fa-user-graduate"></i> Intern</h3>
         </div>
@@ -52,16 +52,16 @@ const generateTeam = fullTeam => {
 
     htmlArray.push(fullTeam
         .filter(employee => employee.getRole() === 'Manager')
-        .map(manager => generateManager(manager))
+        .map(manager => generateManager(manager)).join('')
     );
 
     htmlArray.push(fullTeam
         .filter(employee => employee.getRole() === 'Engineer')
-        .map(engineer => generateEngineer(engineer))
+        .map(engineer => generateEngineer(engineer)).join('')
     );
     htmlArray.push(fullTeam
         .filter(employee => employee.getRole() === 'Intern')
-        .map(intern => generateIntern(intern))
+        .map(intern => generateIntern(intern)).join('')
     );
 
     return htmlArray.join('');

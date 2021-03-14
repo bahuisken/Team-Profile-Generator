@@ -23,9 +23,9 @@ node index.js
 
 Complete the prompts in the terminal. An HTML file will be generated based on the input. 
 
-[Click here for a video walkthrough of this application](TBD)
+[Click here for a video walkthrough of this application](https://drive.google.com/file/d/1ffXpBk-CghKY-HgK6kylkuwnaelzOLwZ/view?usp=sharing)
 
-[Here is a sample HTML created with this Generator](TBD)
+[Here is a sample HTML created with this Generator](.dist/se-team.html)
 
 Here is a screenshot of the generated HTML:
 
@@ -48,7 +48,7 @@ None
 
 ## Tests
 
-TBD
+See tests folder
 
 ## Questions
 

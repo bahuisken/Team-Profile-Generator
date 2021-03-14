@@ -8,7 +8,7 @@ const Intern = require('./lib/Intern');
 const createFullTeam = require('./src/template');
 
 const OUTPUT_DIR = path.resolve(__dirname, 'dist');
-const outputPath = path.join(OUTPUT_DIR, 'se-team.html')
+const outputPath = path.join(OUTPUT_DIR, 'se-team.html');
 //Declare variables
 const teamArr = [];
 // Function to make a Manager
@@ -138,7 +138,11 @@ function addTeammate() {
         {
             type: 'list',
             message: 'Would you like to add a team member?',
-            choices: ['Engineer', 'Intern', 'I don\'t want to add anymore team members'],
+            choices: ['Engineer',
+                new inquirer.Separator(),
+                'Intern',
+                new inquirer.Separator(),
+                'I don\'t want to add anymore team members'],
             name: 'teamMember'
         }
     ]).then(response => {
@@ -155,16 +159,9 @@ function addTeammate() {
         }
     })
 }
-// TODO: Create a function to write README file
-function writeToFile(outputPath, data) {
-    return fs.writeFileSync(outputPath, data)
-}
-
-// TODO: Create a function to initialize app
+//Build whole team, pass array to template.js
 function buildTeam() {
-    // fs.writeFile(outputPath, createFullTeam(teamArr));
-    // console.log('You created a Team', teamArr)
-    writeToFile(outputPath, createFullTeam(teamArr));
+    fs.writeFileSync(outputPath, createFullTeam(teamArr));
     console.log('you will write ', outputPath);
 }
 
