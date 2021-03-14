@@ -25,7 +25,7 @@ Complete the prompts in the terminal. An HTML file will be generated based on th
 
 [Click here for a video walkthrough of this application](https://drive.google.com/file/d/1ffXpBk-CghKY-HgK6kylkuwnaelzOLwZ/view?usp=sharing)
 
-[Here is a sample HTML created with this Generator](.dist/se-team.html)
+[Here is a sample HTML created with this Generator](https://bahuisken.github.io/Team-Profile-Generator/dist/se-team.html)
 
 Here is a screenshot of the generated HTML:
 
